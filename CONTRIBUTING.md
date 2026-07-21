@@ -14,7 +14,7 @@ Perform a manual install of a web server, PHP, database server, and TimeTracker.
 
 The recommended application server stack is WSL Ubuntu with Apache, 8.2 and MariaDb.
 
-Docker has not been maintained since the end of 2023 but, at the time, required installing both docker and docker-compose before running a dev instance:
+Docker has not been maintained since the end of 2023 but at the time docker and docker-compose had to be installed first before running a dev instance:
 
 ```bash
 docker-compose up
