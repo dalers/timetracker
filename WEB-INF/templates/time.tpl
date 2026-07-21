@@ -179,7 +179,7 @@ function handleStop(buttonElement) {
     {/if}
     <td class="time-cell">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
     {if $show_note_column}
-    <td class="text-cell">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+    <td class="text-cell">{if $record.comment_view}{$record.comment_view nofilter}{else}&nbsp;{/if}</td>
     {/if}
     {if $show_files}
       {if $record.has_files}
@@ -209,7 +209,7 @@ function handleStop(buttonElement) {
     {if $show_note_row && $record.comment}
   <tr>
     <td class="note-header-cell">{$i18n.label.note}:</td>
-    <td colspan="{$colspan}" class="text-cell">{$record.comment|escape}</td>
+    <td colspan="{$colspan}" class="text-cell">{$record.comment_view nofilter}</td>
   </tr>
     {/if}
   {/foreach}

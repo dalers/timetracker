@@ -506,6 +506,14 @@ if ($request->isPost()) {
 
 $week_total = ttTimeHelper::getTimeForWeek($selected_date);
 $timeRecords = ttTimeHelper::getRecords($cl_date, $showFiles);
+foreach ($timeRecords as &$record) {
+  if (isset($record['comment']) && $record['comment'] !== '') {
+    $record['comment_view'] = nl2br(htmlspecialchars($record['comment'], ENT_QUOTES, CHARSET));
+  } else {
+    $record['comment_view'] = '';
+  }
+}
+unset($record);
 $showNavigation = ($user->isPluginEnabled('wv') && !$user->isOptionEnabled('week_menu')) ||
   ($user->isPluginEnabled('pu') && !$user->isOptionEnabled('puncher_menu'));
 
