@@ -1,25 +1,19 @@
 # Resources
 
-* [docs](https://www.anuko.com/time-tracker/features.htm) - detailed documentation about this project (needs updating).
-* [forum](https://www.anuko.com/forum/viewforum.php?f=4) - general discussion.
+* [wiki](https://github.com/dalers/timetracker/wiki) - TimeTracker documentation (needs updating).
 
+# Reporting Issues
 
-# Reporting Bugs
+* Create a [new issue on GitHub](https://github.com/dalers/timetracker/wiki) here.
 
-* GitHub users: create a [new issue](https://github.com/anuko/timetracker/issues) here.
-* Forum users: post a [new topic](https://www.anuko.com/forum/viewforum.php?f=4) here.
-* Or, send us a [message](https://www.anuko.com/contact.htm).
-
-
-# Reporting Security Issues
-
-* Use the [contact form](https://www.anuko.com/contact.htm) to report a vulnerability.
-* Or send an encrypted email to security_at_anuko_dot_com. Public key to be published soon.
-
+Report security issues like other issues.
 
 # Setting up a Dev Environment
 
-Docker users: install both docker and docker-compose, then run a dev instance:
+Perform a manual install of a web server, php, database server, and TimeTracker.
+
+Docker was  supported at the end of 2023 but has not been maintained since. To use Docker, install both docker and docker-compose, then run a dev instance:
+
 ```bash
 docker-compose up
 ```
@@ -29,4 +23,3 @@ usr: admin
 psw: secret
 ```
 
-Without docker, perform a manual install of a web server, php, database server, and Time Tracker. Full installation and setup guide can be found [here](https://www.anuko.com/time-tracker/install-guide/index.htm).
