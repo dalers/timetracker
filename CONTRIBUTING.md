@@ -12,7 +12,7 @@ Report security issues like other issues.
 
 Perform a manual install of a web server, PHP, database server, and TimeTracker.
 
-The recommended application server stack is WSL Ubuntu with Apache, 8.2 and MariaDb.
+The recommended application server stack is WSL Ubuntu with Apache2, PHP 8.3 and MariaDb 15.1.
 
 Docker has not been maintained since the end of 2023 but at the time docker and docker-compose had to be installed first before running a dev instance:
 
