@@ -255,7 +255,7 @@ if ($user->isPluginEnabled('tp')){
 }
 
 // Note control.
-$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note,'style'=>'resize: vertical;'));
+$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note,'style'=>'resize: both;'));
 
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
