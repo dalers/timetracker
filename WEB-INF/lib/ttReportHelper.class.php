@@ -1128,7 +1128,7 @@ class ttReportHelper {
       // Allow oprations only with pending timesheets.
       if ($timesheet_id) {
         // Assigning a timesheet to records.
-        $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id".
+        $inner_join = " inner join tt_timesheets ts on (ts.id = ".(int)$timesheet_id.
           " and ts.user_id = $user_id and ts.approve_status is null". // Timesheet to assign to is pending.
           // Part below: existing timesheet either not exists or is also pending.
           " and (l.timesheet_id is null or (l.timesheet_id = ts.id and ts.approve_status is null)))";
