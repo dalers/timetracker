@@ -41,6 +41,7 @@ if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name, false, MAX_NAME_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.thing_name'));
   if (!ttValidString($cl_description, true, MAX_DESCR_CHARS)) $err->add($i18n->get('error.field'), $i18n->get('label.description'));
+  if (!ttGroupHelper::validateCheckboxGroupInput($cl_projects, 'tt_projects')) $err->add($i18n->get('error.field'), $i18n->get('label.projects'));
 
   if ($err->no()) {
     if (!ttTaskHelper::getTaskByName($cl_name)) {
