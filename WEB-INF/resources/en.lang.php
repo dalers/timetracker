@@ -39,7 +39,7 @@ $i18n_key_words = array(
 'menu.options' => 'Options',
 
 // Footer - strings on the bottom of most pages.
-'footer.contribute_msg' => 'You can contribute to Time Tracker in different ways.',
+'footer.contribute_msg' => 'Contribute to Time Tracker.',
 'footer.credits' => 'Credits',
 'footer.license' => 'License',
 'footer.improve' => 'Contribute', // Translators: this could mean "Improve", if it makes better sense in your language.
