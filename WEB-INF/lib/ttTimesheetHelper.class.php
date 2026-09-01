@@ -283,6 +283,8 @@ class ttTimesheetHelper {
     global $user;
     $mdb2 = getConnection();
 
+    $user_id = (int) $user_id;
+
     $group_id = $user->getGroup();
     $org_id = $user->org_id;
 

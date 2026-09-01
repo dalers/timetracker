@@ -27,7 +27,7 @@ if (!$timesheet) {
 
 if ($request->isPost()) {
   $cl_comment = trim($request->getParameter('comment'));
-  $approver_id = $request->getParameter('approver');
+  $approver_id = (int) $request->getParameter('approver');
 }
 
 $options = ttTimesheetHelper::getReportOptions($timesheet);

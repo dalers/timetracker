@@ -62,6 +62,8 @@ if ($request->isPost()) {
   }
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
+  if (!ttGroupHelper::validateCheckboxGroupInput($cl_projects, 'tt_projects'))
+    $err->add($i18n->get('error.field'), $i18n->get('label.projects'));
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
       if (ttValidFloat($request->getParameter('rate_'.$p), true)) {
