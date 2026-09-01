@@ -57,6 +57,7 @@ class ttFavReportHelper {
   static function getReport($id) {
     $mdb2 = getConnection();
 
+    $id = (int) $id;
     $sql = "select * from tt_fav_reports where id = $id and status = 1";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

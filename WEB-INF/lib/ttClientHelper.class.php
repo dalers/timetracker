@@ -191,6 +191,7 @@ class ttClientHelper {
     $last_id = $mdb2->lastInsertID('tt_clients', 'id');
     if (isset($projects) && count($projects) > 0)
       foreach ($projects as $p_id) {
+        $p_id = (int) $p_id;
         $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($last_id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))
@@ -231,6 +232,7 @@ class ttClientHelper {
       die($affected->getMessage());
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
+        $p_id = (int) $p_id;
         $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))

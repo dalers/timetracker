@@ -47,6 +47,7 @@ if ($request->isPost()) {
   if (!ttValidString($cl_name)) $err->add($i18n->get('error.field'), $i18n->get('label.client_name'));
   if (!ttValidString($cl_address, true)) $err->add($i18n->get('error.field'), $i18n->get('label.client_address'));
   if (!ttValidFloat($cl_tax, true)) $err->add($i18n->get('error.field'), $i18n->get('label.tax'));
+  if (!ttGroupHelper::validateCheckboxGroupInput($cl_projects, 'tt_projects')) $err->add($i18n->get('error.field'), $i18n->get('label.projects'));
 
   if ($err->no()) {
     if (!ttClientHelper::getClientByName($cl_name)) {

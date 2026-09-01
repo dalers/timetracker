@@ -21,6 +21,18 @@ define('TIMESHEET_NOT_APPROVED', 5); // Include records in disapproved timesheet
 // Class ttReportHelper is used for help with reports.
 class ttReportHelper {
 
+  // makeIdList takes a comma-separated list of ids and returns one that is safe
+  // to interpolate into an "in (...)" clause. An empty result is returned as a
+  // value that matches nothing, so that a list can never widen a query.
+  static function makeIdList($ids) {
+    $id_list = array();
+    foreach (explode(',', $ids) as $id) {
+      $id = trim($id);
+      if (ttValidInteger($id)) $id_list[] = (int) $id;
+    }
+    return $id_list ? join(',', $id_list) : '-1';
+  }
+
   // getWhere prepares a WHERE clause for a report query.
   static function getWhere($options) {
     global $user;
@@ -48,7 +60,7 @@ class ttReportHelper {
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
 
     if (isset($options['project_ids']))
-      $dropdown_parts .= ' and l.project_id in ('.$options['project_ids'].')';
+      $dropdown_parts .= ' and l.project_id in ('.ttReportHelper::makeIdList($options['project_ids']).')';
     // if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id']; // This was here for a single select.
 
     if ($options['task_id']) $dropdown_parts .= ' and l.task_id = '.$options['task_id'];
@@ -137,7 +149,7 @@ class ttReportHelper {
     }
 
     // Prepare sql query part for user list.
-    $userlist = isset($options['users']) ? $options['users'] : '-1';
+    $userlist = isset($options['users']) ? ttReportHelper::makeIdList($options['users']) : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and l.user_id in ($userlist)";
     else
@@ -186,7 +198,7 @@ class ttReportHelper {
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
 
     if (isset($options['project_ids']))
-      $dropdown_parts .= ' and ei.project_id in ('.$options['project_ids'].')';
+      $dropdown_parts .= ' and ei.project_id in ('.ttReportHelper::makeIdList($options['project_ids']).')';
     // if ($options['project_id']) $dropdown_parts .= ' and l.project_id = '.$options['project_id']; // This was here for a single select.
 
     if ($options['invoice']==1) $dropdown_parts .= ' and ei.invoice_id is not null';
@@ -253,7 +265,7 @@ class ttReportHelper {
     }
 
     // Prepare sql query part for user list.
-    $userlist = isset($options['users']) ? $options['users'] : '-1';
+    $userlist = isset($options['users']) ? ttReportHelper::makeIdList($options['users']) : '-1';
     if ($user->can('view_reports') || $user->can('view_all_reports') || $user->isClient())
       $user_list_part = " and ei.user_id in ($userlist)";
     else
@@ -1128,7 +1140,7 @@ class ttReportHelper {
       // Allow oprations only with pending timesheets.
       if ($timesheet_id) {
         // Assigning a timesheet to records.
-        $inner_join = " inner join tt_timesheets ts on (ts.id = $timesheet_id".
+        $inner_join = " inner join tt_timesheets ts on (ts.id = ".(int)$timesheet_id.
           " and ts.user_id = $user_id and ts.approve_status is null". // Timesheet to assign to is pending.
           // Part below: existing timesheet either not exists or is also pending.
           " and (l.timesheet_id is null or (l.timesheet_id = ts.id and ts.approve_status is null)))";

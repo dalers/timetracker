@@ -175,9 +175,9 @@ if ($request->isPost()) {
     // We act on selected records. Are there any?
     foreach($_POST as $key => $val) {
       if ('log_id_' == substr($key, 0, 7))
-        $time_log_ids[] = substr($key, 7);
+        $time_log_ids[] = (int) substr($key, 7);
       if ('item_id_' == substr($key, 0, 8))
-        $expense_item_ids[] = substr($key, 8);
+        $expense_item_ids[] = (int) substr($key, 8);
     }
     if (!$time_log_ids && !$expense_item_ids) $err->Add($i18n->get('error.record')); // There are no selected records.
     // Validation of parameteres ended here.
@@ -194,6 +194,10 @@ if ($request->isPost()) {
   if ($err->no()) {
     if ($request->getParameter('btn_mark_approved')) {
       // User clicked the "Mark approved" button to mark some or all items either approved or not approved.
+      if (!($user->isPluginEnabled('ap') && ($user->can('approve_reports') || $user->can('approve_all_reports')))) {
+        header('Location: access_denied.php');
+        exit();
+      }
 
       // Determine user action.
       $mark_approved = $request->getParameter('mark_approved_action_options') == 1 ? true : false;
@@ -210,6 +214,10 @@ if ($request->isPost()) {
 
     if ($request->getParameter('btn_mark_paid')) {
       // User clicked the "Mark paid" button to mark some or all items either paid or not paid.
+      if (!($user->isPluginEnabled('ps') && $user->can('manage_invoices'))) {
+        header('Location: access_denied.php');
+        exit();
+      }
 
       // Determine user action.
       $mark_paid = $request->getParameter('mark_paid_action_options') == 1 ? true : false;
@@ -226,6 +234,10 @@ if ($request->isPost()) {
 
     if ($request->getParameter('btn_assign_invoice')) {
       // User clicked the Submit button to assign all or some items to a recent invoice.
+      if (!($user->isPluginEnabled('iv') && $user->can('manage_invoices') && $client_id && !$user->isClient())) {
+        header('Location: access_denied.php');
+        exit();
+      }
 
       // Determine invoice id.
       $invoice_id = $request->getParameter('recent_invoice');
@@ -241,6 +253,10 @@ if ($request->isPost()) {
 
     if ($request->getParameter('btn_assign_timesheet')) {
       // User clicked the Submit button to assign all or some items to a timesheet.
+      if (!$user->isPluginEnabled('ts')) {
+        header('Location: access_denied.php');
+        exit();
+      }
 
       // Determine invoice id.
       $timesheet_id = $request->getParameter('timesheet');

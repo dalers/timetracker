@@ -119,6 +119,11 @@ if ($request->isPost()) {
   $_SESSION['chart_interval'] = $cl_interval;
 }
 
+if ($cl_fav_report != -1 && !ttFavReportHelper::get($cl_fav_report)) {
+  $cl_fav_report = -1;
+  $_SESSION['fav_report'] = $cl_fav_report;
+}
+
 // Elements of chartForm.
 $chart_form = new Form('chartForm');
 $largeScreenCalendarRowSpan = 1; // Number of rows calendar spans on large screens.

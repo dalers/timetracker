@@ -1025,6 +1025,7 @@ class ttOrgImportHelper {
 
     $tax = str_replace(',', '.', $tax);
     if ($tax == '') $tax = 0;
+    $tax = (float) $tax;
 
     $sql = "insert into tt_clients (group_id, org_id, name, address, tax, projects, status)".
       " values ($group_id, $org_id, ".$mdb2->quote($name).", ".$mdb2->quote($address).", $tax, ".$mdb2->quote($comma_separated).", ".$mdb2->quote($status).")";
@@ -1037,6 +1038,7 @@ class ttOrgImportHelper {
 
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
+        $p_id = (int) $p_id;
         $sql = "insert into tt_client_project_binds (client_id, project_id, group_id, org_id) values($last_id, $p_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);
         if (is_a($affected, 'PEAR_Error'))

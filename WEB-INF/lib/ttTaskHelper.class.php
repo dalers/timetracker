@@ -141,6 +141,7 @@ class ttTaskHelper {
 
     if (is_array($projects)) {
       foreach ($projects as $p_id) {
+        $p_id = (int) $p_id;
         // Insert task binds into tt_project_task_binds table.
         $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
           " values($p_id, $last_id, $group_id, $org_id)";
@@ -203,6 +204,7 @@ class ttTaskHelper {
       die($affected->getMessage());
     if (count($projects) > 0)
       foreach ($projects as $p_id) {
+        $p_id = (int) $p_id;
         $sql = "insert into tt_project_task_binds (project_id, task_id, group_id, org_id)".
           " values($p_id, $task_id, $group_id, $org_id)";
         $affected = $mdb2->exec($sql);

@@ -105,6 +105,7 @@ class ttUserHelper {
     if (count($projects) > 0) {
       // We have at least one project assigned. Insert corresponding entries in tt_user_project_binds table.
       foreach($projects as $p) {
+        $p['id'] = (int) $p['id'];
         if(!isset($p['rate']))
           $p['rate'] = 0;
         else
